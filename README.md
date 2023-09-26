@@ -59,8 +59,17 @@ das caixas como inserir nome, e-mail e etc e serem armazenados no próprio códi
 do localStorage.setItem('registros', JSON.stringify(registros))" e caso queira excluir,
 "row.parentNode.removeChild(row);
 
-APRENDIZADO
+2. Do aprendizado
   - Durante o desenvolvimento do projeto aprendi muitas coisas como um pouco mais sobre o JavaScript, o qual ainda preciso treinar
   e melhorar bastante e me tornei bem mais confiante com minhas habilidades em HTML e CSS, me sentindo confiante
   até parar criar um projeto igual a esse ou até um pouco mais complexo.
+
+
+3. Das dificuldades
+  - No projeto um dos principais desafios foi visualizar o desafio com olhar de programador, pois é algo
+que ainda devo melhorar ao longo dos meus estudos.
+Além disso mexer com JavaScript visto que ainda estou estudando o mesmo assunto foi BEM desafiador,
+foram horas e horas de mais estudos e pesquisas mas consegui algo.
+Gostaria de ter feito mais uma função, onde seria validado o e-mail como existente ou não,
+porém não consegui fazer e irei estudar pra em breve não haver mais dificuldades.
   
