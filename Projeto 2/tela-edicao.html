@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edição de Usuário</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 400px;
+            padding: 45px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            text-align: left;
+        }
+
+        input[type="text"], input[type="password"], select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            margin-bottom: 20px;
+        }
+
+        select {
+            padding: 10px;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 12px 0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Edição de Usuário</h2>
+        <form id="edicaoForm">
+            <label for="nome">Nome do Usuário:</label>
+            <input type="text" id="nome" name="nome" maxlength="150" required>
+
+            <label for="email">E-mail do Usuário:</label>
+            <input type="text" id="email" name="email" maxlength="50" required>
+
+            <label for="senha">Senha do Usuário:</label>
+            <input type="password" id="senha" name="senha" maxlength="8" required>
+
+            <label for="status">Status do Usuário:</label>
+            <select id="status" name="status">
+                <option value="Ativo">Ativo</option>
+                <option value="Excluído">Excluído</option>
+            </select>
+
+            <button type="submit">Salvar Alterações</button>
+        </form>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const nomeParam = urlParams.get('nome');
+        const emailParam = urlParams.get('email');
+
+        document.getElementById("nome").value = nomeParam;
+        document.getElementById("email").value = emailParam;
+
+        document.getElementById("edicaoForm").addEventListener("submit", function (e) {
+            e.preventDefault(); // Evita que o formulário seja enviado
+
+            var novoNome = document.getElementById("nome").value;
+            var novoEmail = document.getElementById("email").value;
+
+            var registros = JSON.parse(localStorage.getItem('registros')) || [];
+
+            var indiceEdicao = -1;
+            for (var i = 0; i < registros.length; i++) {
+                if (registros[i].nome === nomeParam && registros[i].email === emailParam) {
+                    indiceEdicao = i;
+                    break;
+                }
+            }
+
+            if (indiceEdicao !== -1) {
+                registros[indiceEdicao].nome = novoNome;
+                registros[indiceEdicao].email = novoEmail;
+
+                localStorage.setItem('registros', JSON.stringify(registros));
+            }
+
+            window.location.href = "index.html";
+        });
+    </script>
+</body>
+</html>
