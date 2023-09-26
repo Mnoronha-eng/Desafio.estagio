@@ -51,12 +51,13 @@ Utilizei também o seguinte comando para melhorar a mesma interface:
 Assim para que as seções de nome, e-mail, senha e status ficassem
 em formato de coluna e não na mesma linha.
 
+        
 1.3 Do JavaScript
 Utilizei a sessão de JavaScript para obter os parâmetros que eu buscava 
 na aplicação, preenchimento dos campos do formulário, trabalhar o comportamento
 das caixas como inserir nome, e-mail e etc e serem armazenados no próprio código através
-do "localStorage.setItem('registros', JSON.stringify(registros))" e caso queira excluir,
-"row.parentNode.removeChild(row);".
+do localStorage.setItem('registros', JSON.stringify(registros))" e caso queira excluir,
+"row.parentNode.removeChild(row);
 
 APRENDIZADO
   - Durante o desenvolvimento do projeto aprendi muitas coisas como um pouco mais sobre o JavaScript, o qual ainda preciso treinar
