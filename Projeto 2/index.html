@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tela Principal</title>
+    <style>
+        /* Estilos CSS aqui, se necessário */
+    </style>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #333;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        input[type="text"], input[type="password"], select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            outline: none;
+        }
+
+        select {
+            padding: 8px;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Tela Principal</h1>
+
+        <!-- Lista de Usuários -->
+        <table id="userList">
+            <tr>
+                <th>Nome do Usuário</th>
+                <th>E-mail do Usuário</th>
+                <th>Ações</th>
+            </tr>
+            <!-- Os dados dos usuários serão inseridos aqui usando JavaScript -->
+        </table>
+
+        <!-- Botão Novo -->
+        <button id="novo">Novo</button>
+    </div>
+
+    <script>
+        // JavaScript para abrir a tela de cadastro de usuários
+        document.getElementById("novo").addEventListener("click", function() {
+            window.location.href = "tela-cadastro.html";
+        });
+
+        // Função para adicionar um novo usuário à lista
+        function adicionarUsuario(nome, email) {
+            var userList = document.getElementById("userList");
+            var newRow = userList.insertRow(-1);
+            var cell1 = newRow.insertCell(0);
+            var cell2 = newRow.insertCell(1);
+            var cell3 = newRow.insertCell(2);
+
+            cell1.innerHTML = nome;
+            cell2.innerHTML = email;
+            cell3.innerHTML = '<button class="editar">Editar</button> <button class="excluir">Excluir</button>';
+        }
+
+        // Verifica se há registros no Local Storage e exibe na lista
+        function exibirRegistros() {
+            var registros = JSON.parse(localStorage.getItem('registros')) || [];
+            registros.forEach(function(registro) {
+                adicionarUsuario(registro.nome, registro.email);
+            });
+        }
+
+        // Chama a função para exibir registros ao carregar a página
+        exibirRegistros();
+
+        // Evento para editar um registro
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('editar')) {
+                var row = e.target.parentNode.parentNode;
+                var nome = row.cells[0].textContent;
+                var email = row.cells[1].textContent;
+
+                // Pode redirecionar para a tela de edição com os dados preenchidos
+                window.location.href = 'tela-edicao.html?nome=' + encodeURIComponent(nome) + '&email=' + encodeURIComponent(email);
+            }
+
+            // Evento para excluir um registro
+            if (e.target.classList.contains('excluir')) {
+                var row = e.target.parentNode.parentNode;
+                var nome = row.cells[0].textContent;
+                var email = row.cells[1].textContent;
+
+                // Obtém os registros existentes do Local Storage
+                var registros = JSON.parse(localStorage.getItem('registros')) || [];
+
+                // Filtra os registros para excluir o registro correspondente
+                registros = registros.filter(function(registro) {
+                    return !(registro.nome === nome && registro.email === email);
+                });
+
+                // Salva os registros atualizados no Local Storage
+                localStorage.setItem('registros', JSON.stringify(registros));
+
+                // Remove a linha da tabela
+                row.parentNode.removeChild(row);
+            }
+        });
+    </script>
+</body>
+</html>
