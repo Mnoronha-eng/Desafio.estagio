@@ -42,6 +42,12 @@ uma cor azul claro utilizando as seguintes tags para CSS:
             align-items: center;
             min-height: 100vh;
         }
+*OBS: O CSS foi colocado aqui no body do HTML por eu ter me perdido diversas
+vezes alternando as abas de HTML e CSS e tentando fazer funcionar e,
+fazendo algumas pesquisas, vi que por ser algo "simples", eu poderia colocar
+dentro do próprio body do HTML. Isso facilitou um pouco para que eu
+conseguisse trabalhar melhor.
+        
 Utilizei também o seguinte comando para melhorar a mesma interface:
 "}
 .formulario{
